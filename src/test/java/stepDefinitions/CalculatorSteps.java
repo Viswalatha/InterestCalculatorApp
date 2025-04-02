@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import Pages.CalculatorPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -44,5 +45,15 @@ public class CalculatorSteps {
     @When("the user leaves a {string} missing")
     public void theUserLeavesAMissing(String field) {
         calculatorPage.calculateInterestWithAMissingField(field);
+    }
+
+    @And("the user selects specific fields")
+    public void theUserSelectsSpecificFields() {
+       calculatorPage.calculateInterestForFixedFieldValues();
+    }
+
+    @Then("user should see expected overall calculation")
+    public void userShouldSeeExpectedOverallCalculation() {
+        calculatorPage.verifyInterestAmountForFixedFieldValues();
     }
 }

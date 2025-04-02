@@ -9,6 +9,16 @@ Feature: Interest Calculator
     And the user selects all required fields
     Then user should see the expectedInterestAmount and totalAmount
 
+# Scenario checking that interest calculation has been correctly performed using:
+# fixed principal amount - 7500
+# duration - 1 day
+# interest rate - 5%
+  Scenario:Successful Calculation
+    Given the user is on the login page
+    When the user successfully logs in with a valid username and password
+    And the user selects specific fields
+    Then user should see expected overall calculation
+
   Scenario Outline: Missing Mandatory Fields
     Given the user is on the login page
     When the user successfully logs in with a valid username and password

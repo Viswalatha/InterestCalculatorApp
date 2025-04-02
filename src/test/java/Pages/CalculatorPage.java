@@ -58,6 +58,15 @@ public class CalculatorPage extends PageObject {
         clickUsingJavaScript(getDriver(), By.className("btn-primary"), 10);
     }
 
+    public void calculateInterestForFixedFieldValues() {
+        clickOn(getDriver(), By.id("dropdownMenuButton"), 10);
+        clickOn(getDriver(),By.id("rate-5%"),10);
+        Actions actions = new Actions(getDriver());
+        actions.moveByOffset(10, 10).click().perform();
+        clickUsingJavaScript(getDriver(), By.id("gridCheck1"), 10);
+        clickUsingJavaScript(getDriver(), By.className("btn-primary"), 10);
+    }
+
     public void selectRandomInterestRate() {
         clickOn(getDriver(), By.id("dropdownMenuButton"), 10);
         List<WebElement> checkboxes = getDriver().findElements(By.xpath("//input[@type='checkbox']"));
@@ -131,6 +140,25 @@ public class CalculatorPage extends PageObject {
         Assert.assertEquals("Interest format is incorrect!", formattedInterest1, actualTotalAmountText);
 
     }
+
+    public void verifyInterestAmountForFixedFieldValues() {
+        WebElement interestAmountHeader = getDriver().findElement(By.id("interestAmount"));
+        String actualInterestAmountText = interestAmountHeader.getText().trim();
+        String numericInterestAmountText = actualInterestAmountText.replaceAll("[^0-9.,]", "");
+        double actualInterestAmount = Double.parseDouble(numericInterestAmountText.replace(",", ""));
+        WebElement totalAmountHeader = getDriver().findElement(By.id("totalAmount"));
+        String actualTotalAmountText = totalAmountHeader.getText().trim();
+        String numericTotalAmountText = actualTotalAmountText.replaceAll("[^0-9.,]", "");
+        double actualTotalAmount = Double.parseDouble(numericTotalAmountText.replace(",", ""));
+        double principalAmount = 7500;
+        double interestRate = 5;
+        int timePeriod = 1; // 1 day
+        double expectedInterestAmount = (principalAmount * interestRate * timePeriod) / (365 * 100);
+        double expectedTotalAmount = principalAmount + expectedInterestAmount;
+        Assert.assertEquals("Interest amount is incorrect!", expectedInterestAmount, actualInterestAmount, 0.01);
+        Assert.assertEquals("Total amount is incorrect!", expectedTotalAmount, actualTotalAmount, 0.01);
+    }
+
 
     public void calculateInterestWithAMissingField(String field) {
         selectRandomPrincipalAmount();
