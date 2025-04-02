@@ -1,5 +1,3 @@
-Read Me
-
 This is a test for an Interest Calculator App.
 Author : Viswalatha Srivella
 
