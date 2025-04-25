@@ -1,12 +1,8 @@
-package Pages;
+package pages;
 
 
-import net.serenitybdd.annotations.DefaultUrl;
-import net.serenitybdd.core.annotations.findby.FindBy;
-import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,38 +11,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
-@DefaultUrl("https://ten10techtest-dnd6bgfzcqdggver.uksouth-01.azurewebsites.net/Account/Login")
-public class CalculatorPage extends PageObject {
-
-    public void enterInputValue(WebDriver driver, By locator, String text, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        element.sendKeys(text);
-    }
-
-    public void clickOn(WebDriver driver, By locator, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        element.click();
-    }
-
-    public void clickUsingJavaScript(WebDriver driver, By locator, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-
-        if (element != null) {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].click();", element);
-        } else {
-            System.out.println("Element not found: " + locator);
-        }
-    }
-
-    public void enterLoginDetails() {
-        enterInputValue(getDriver(), By.id("UserName"), "srivellamk@gmail.com", 10);
-        enterInputValue(getDriver(), By.id("Password"), "Grud@431", 10);
-        clickOn(getDriver(), By.id("login-submit"), 10);
-    }
+public class CalculatorPage extends BasePage {
 
     public void calculateInterest() {
         selectRandomPrincipalAmount();

@@ -27,7 +27,7 @@ Feature: Interest Calculator
     Examples:
       | field         |
       | interest rate |
-#      | consent       |
+     | consent       |
 
 # The Duration and Principal Amount and selected by default so are not being tested for.
 
